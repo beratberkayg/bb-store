@@ -3,6 +3,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Provider } from "react-redux";
 import { store } from "@/redux/store";
+import ReduxProvider from "@/redux/ReduxProvider";
+import Navbar from "@/components/header/Navbar";
+import Footer from "@/components/footer/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,10 +21,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} flex flex-col`}>
-        <Provider store={store}>
+      <body className={`${inter.className} flex flex-col min-h-screen`}>
+        <ReduxProvider>
+          <Navbar />
           <main className="flex-grow">{children}</main>
-        </Provider>
+          <Footer />
+        </ReduxProvider>
       </body>
     </html>
   );
