@@ -1,24 +1,13 @@
 "use client";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { getData } from "@/redux/slices/dataSlice";
-import { useEffect } from "react";
+import Category from "@/components/home/Category";
+import Item from "@/components/home/Item";
+import Products from "@/components/home/Products";
 
 const Home = () => {
-  const dispatch = useAppDispatch();
-  const { data, dataLoading, dataError } = useAppSelector(
-    (state) => state.data
-  );
-  console.log(data);
-
-  useEffect(() => {
-    dispatch(getData());
-  }, []);
-
   return (
     <div>
-      {data.map((dt) => (
-        <div key={dt.id}>{dt.title}</div>
-      ))}
+      <Category />
+      <Products />
     </div>
   );
 };
