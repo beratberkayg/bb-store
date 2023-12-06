@@ -8,12 +8,12 @@ interface ParamsType {
 
 const Home = ({ searchParams }: { searchParams: ParamsType }) => {
   const url = searchParams.category;
-  console.log(url);
 
   return (
     <div>
-      <Category />
-      <Products url={url} />
+      {/* <Category />
+      <Products url={url} /> */}
+      anasayfa
     </div>
   );
 };
