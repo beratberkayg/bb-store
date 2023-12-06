@@ -1,13 +1,19 @@
 "use client";
 import Category from "@/components/home/Category";
-import Item from "@/components/home/Item";
 import Products from "@/components/home/Products";
 
-const Home = () => {
+interface ParamsType {
+  [key: string]: string;
+}
+
+const Home = ({ searchParams }: { searchParams: ParamsType }) => {
+  const url = searchParams.category;
+  console.log(url);
+
   return (
     <div>
       <Category />
-      <Products />
+      <Products url={url} />
     </div>
   );
 };

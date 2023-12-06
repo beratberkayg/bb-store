@@ -20,9 +20,11 @@ const initialState: initialType = {
 
 export const getProducts = createAsyncThunk(
   "dataSlice/getProducts",
-  async () => {
+  async (url: string | undefined) => {
     try {
-      const response = await axios.get("https://fakestoreapi.com/products");
+      const response = await axios.get(
+        `https://fakestoreapi.com/products${url ? "/category/" + url : ""}`
+      );
       return response.data;
     } catch (error) {
       throw error;

@@ -20,7 +20,7 @@ const ItemPage = ({ params }: { params: { id: number } }) => {
 
   return (
     <div>
-      {item.title} {item.category}
+      {item.title}
       <img src={item.image} alt="" className="w-48 h-48 object-cover" />
     </div>
   );

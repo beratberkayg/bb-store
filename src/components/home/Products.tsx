@@ -4,7 +4,7 @@ import { getProducts } from "@/redux/slices/dataSlice";
 import { useEffect } from "react";
 import Item from "./Item";
 
-const Products = () => {
+const Products = ({ url }: { url: string }) => {
   const dispatch = useAppDispatch();
   const { data, dataLoading, dataError } = useAppSelector(
     (state) => state.data
@@ -12,8 +12,8 @@ const Products = () => {
   console.log(data);
 
   useEffect(() => {
-    dispatch(getProducts());
-  }, []);
+    dispatch(getProducts(url));
+  }, [url, dispatch]);
   return (
     <div>
       {data.map((item) => (

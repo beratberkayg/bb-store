@@ -6,7 +6,7 @@ const Item = ({ item }: { item: dataType }) => {
   const router = useRouter();
   return (
     <div
-      className="cursor-pointer"
+      className="cursor-pointer border"
       onClick={() => router.push(`/item/${item.id}`)}
     >
       {item.title}
