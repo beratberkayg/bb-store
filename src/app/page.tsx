@@ -1,5 +1,6 @@
 "use client";
 import Category from "@/components/home/Category";
+import Hero from "@/components/home/Hero";
 import Products from "@/components/home/Products";
 
 interface ParamsType {
@@ -13,7 +14,8 @@ const Home = ({ searchParams }: { searchParams: ParamsType }) => {
     <div>
       {/* <Category />
       <Products url={url} /> */}
-      anasayfa
+
+      <Hero />
     </div>
   );
 };
