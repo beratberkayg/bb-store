@@ -12,10 +12,11 @@ const Home = ({ searchParams }: { searchParams: ParamsType }) => {
 
   return (
     <div>
-      {/* <Category />
-      <Products url={url} /> */}
-
       <Hero />
+      <div className="flex flex-col">
+        <Category url={url} />
+        <Products url={url} />
+      </div>
     </div>
   );
 };
