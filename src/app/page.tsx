@@ -13,7 +13,7 @@ const Home = ({ searchParams }: { searchParams: ParamsType }) => {
   return (
     <div>
       <Hero />
-      <div className="flex flex-col">
+      <div id="ürün" className="flex flex-col">
         <Category url={url} />
         <Products url={url} />
       </div>
