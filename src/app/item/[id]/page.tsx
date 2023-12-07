@@ -1,10 +1,11 @@
 "use client";
 
-import { decrement, increment } from "@/redux/counterSlice";
+import { decrement, increment } from "@/redux/slices/counter/counterSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { getİtem } from "@/redux/slices/dataSlice";
 
 import { useEffect, useState } from "react";
+import { addToCart } from "@/redux/slices/cart/cartSlice";
 
 const ItemPage = ({ params }: { params: { id: number } }) => {
   const id = params.id;
@@ -23,8 +24,28 @@ const ItemPage = ({ params }: { params: { id: number } }) => {
 
   const [quantity, setQuantity] = useState(0);
 
+  const decrement = () => {
+    if (quantity > 0) setQuantity(quantity - 1);
+  };
+
+  const increment = () => {
+    if (item.rating && quantity < item.rating?.count) setQuantity(quantity + 1);
+  };
+
+  const addBasket = () => {
+    dispatch(
+      addToCart({
+        id: item.id,
+        title: item.title,
+        image: item.image,
+        quantity: quantity,
+        price: item.price,
+      })
+    );
+  };
+
   return (
-    <div className="w-full h-full flex flex-col md:flex-row md:items-center mt-3">
+    <div className="w-full h-full flex flex-col  md:items-center mt-3">
       {dataLoading && <div>Yükleniyor...</div>}
       <img
         src={item.image}
@@ -38,21 +59,18 @@ const ItemPage = ({ params }: { params: { id: number } }) => {
           <div>
             <p className="text-lg font-bold md:text-2xl">{item.price}$</p>
             <div className="flex items-center justify-center gap-3 text-2xl">
-              <span
-                onClick={() => dispatch(decrement())}
-                className="cursor-pointer"
-              >
+              <span onClick={decrement} className="cursor-pointer">
                 -
               </span>
-              <span>{value}</span>
-              <span
-                onClick={() => dispatch(increment())}
-                className="cursor-pointer"
-              >
+              <span>{quantity}</span>
+              <span onClick={increment} className="cursor-pointer">
                 +
               </span>
             </div>
-            <button className="rounded-lg p-1 bg-orange-500 text-white hover:text-orange-500 hover:bg-white text-medium">
+            <button
+              onClick={addBasket}
+              className="rounded-lg p-1 bg-orange-500 text-white hover:text-orange-500 hover:bg-white text-medium"
+            >
               Sepete Ekle
             </button>
           </div>

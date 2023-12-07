@@ -18,6 +18,9 @@ const Item = ({ item }: { item: dataType }) => {
       <div className="absolute bottom-0 left-0 text-center w-full text-xl text-white shadow-lg shadow-[#2A0E61]/50 bg-[#03001417] backdrop-blur-md line-clamp-1 rounded-b-xl">
         {item.title}
       </div>
+      <div className="absolute top-1 right-1 bg-[#03001417] backdrop-blur-md rounded-full w-14 h-14 flex items-center justify-center font-bold bg-orange-500">
+        {item.price}$
+      </div>
     </div>
   );
 };
