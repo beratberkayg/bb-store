@@ -20,16 +20,6 @@ const ItemPage = ({ params }: { params: { id: number } }) => {
     dispatch(getİtem(id));
   }, [id]);
 
-  const [quantity, setQuantity] = useState<number>(0);
-
-  const decrement = () => {
-    if (quantity > 0) setQuantity(quantity - 1);
-  };
-
-  const increment = () => {
-    if (item.rating && quantity < item.rating?.count) setQuantity(quantity + 1);
-  };
-
   const addBasket = (item: dataType) => {
     dispatch(addToCart(item));
   };
