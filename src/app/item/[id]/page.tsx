@@ -48,7 +48,7 @@ const ItemPage = ({ params }: { params: { id: number } }) => {
           </h2>
           <div>
             <p className="text-lg font-bold md:text-2xl">{item.price}$</p>
-            <div className="flex items-center justify-center gap-3 text-2xl">
+            {/* <div className="flex items-center justify-center gap-3 text-2xl">
               <span onClick={decrement} className="cursor-pointer">
                 -
               </span>
@@ -56,10 +56,10 @@ const ItemPage = ({ params }: { params: { id: number } }) => {
               <span onClick={increment} className="cursor-pointer">
                 +
               </span>
-            </div>
+            </div> */}
             <button
               onClick={() => addBasket(item)}
-              className="rounded-lg p-1 bg-orange-500 text-white hover:text-orange-500 hover:bg-white text-medium"
+              className="rounded-lg py-1 px-3 bg-orange-500 text-white hover:text-orange-500 hover:bg-white text-medium my-3"
             >
               Sepete Ekle
             </button>
