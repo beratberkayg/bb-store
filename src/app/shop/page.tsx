@@ -39,9 +39,9 @@ const Shop = () => {
         Alışveriş Sepetiniz
       </div>
       <div className=" flex flex-col gap-3">
-        <div className="flex flex-wrap gap-3 items-center justify-center">
+        <div className="flex flex-wrap gap-3 items-center justify-center ">
           {cartItems.map((item) => (
-            <div className="border-2 border-orange-500 rounded-lg p-3 flex flex-col gap-3 font-medium w-full md:w-[48%]">
+            <div className="border-2 border-orange-500 rounded-lg p-3 flex flex-col  gap-3 font-medium w-full md:w-[40%] h-[490px]">
               <Link
                 className="flex items-center justify-center"
                 href={`/item/${item.id}`}
@@ -54,7 +54,9 @@ const Shop = () => {
               </Link>
 
               <div className="flex flex-col justify-center items-center">
-                <h2 className="text-xl text-center">{item.title}</h2>
+                <h2 className="text-xl text-center line-clamp-1">
+                  {item.title}
+                </h2>
                 <p className="text-xl border-b-2 border-orange-500 w-full text-center">
                   {item.price} $
                 </p>
@@ -86,11 +88,11 @@ const Shop = () => {
               </div>
             </div>
           ))}
-        </div>
-        <div className="flex flex-col justify-end items-end md:mr-2">
-          <div className="border-2 rounded-lg border-orange-500 p-3 text-xl font-medium">
-            <div>Toplam Ürün Sayısı : {cartTotalQuantity}</div>
-            <div>Toplam Ödemeniz : {cartTotalAmount}$</div>
+          <div className="flex flex-col justify-end items-end ">
+            <div className="border-2 rounded-lg border-orange-500 p-3 text-xl font-medium">
+              <div>Toplam Ürün Sayısı : {cartTotalQuantity}</div>
+              <div>Toplam Ödemeniz : {cartTotalAmount}$</div>
+            </div>
           </div>
         </div>
       </div>

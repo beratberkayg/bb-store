@@ -7,11 +7,11 @@ const Item = ({ item }: { item: dataType }) => {
   const router = useRouter();
   return (
     <div
-      className="cursor-pointer border-2 border-orange-500 rounded-xl relative"
+      className="cursor-pointer border-2 border-orange-500 rounded-xl relative hover:scale-125 hover:z-10"
       onClick={() => router.push(`/item/${item.id}`)}
     >
       <img
-        className="w-[175px] h-[200px] rounded-xl lg:w-[350px] lg:h-[300px]"
+        className="w-[160px] h-[200px]  object-fill rounded-xl md:w-[210px] md:h-[250px] lg:w-[250px] lg:h-[280px]"
         src={item.image}
         alt=""
       />

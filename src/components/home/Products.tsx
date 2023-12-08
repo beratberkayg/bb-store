@@ -14,7 +14,7 @@ const Products = ({ url }: { url: string }) => {
     dispatch(getProducts(url));
   }, [url, dispatch]);
   return (
-    <div className=" mt-3 flex flex-wrap gap-2 items-center justify-around">
+    <div className=" mt-3 flex flex-wrap gap-5 items-center  justify-center md:justify-evenly">
       {data.map((item) => (
         <Item key={item.id} item={item} />
       ))}
