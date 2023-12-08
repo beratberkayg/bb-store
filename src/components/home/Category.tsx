@@ -12,7 +12,6 @@ const Category = ({ url }: { url: string }) => {
   useEffect(() => {
     dispatch(getCategory());
   }, [dispatch]);
-  console.log(categories);
 
   return (
     <div className="flex items-center justify-between flex-wrap w-full border-b border-orange-500 py-1 ">

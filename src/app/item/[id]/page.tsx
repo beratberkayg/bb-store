@@ -1,28 +1,26 @@
 "use client";
 
-import { decrement, increment } from "@/redux/slices/counter/counterSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { addToCart } from "@/redux/slices/cart/cartSlice";
 import { getİtem } from "@/redux/slices/dataSlice";
+import { dataType } from "@/types/type";
 
 import { useEffect, useState } from "react";
-import { addToCart } from "@/redux/slices/cart/cartSlice";
 
 const ItemPage = ({ params }: { params: { id: number } }) => {
   const id = params.id;
-  console.log(id);
   const dispatch = useAppDispatch();
   const { item, dataLoading, dataError } = useAppSelector(
     (state) => state.data
   );
-  const { value } = useAppSelector((state) => state.counter);
+  const { cartItems } = useAppSelector((state) => state.carts);
+  console.log(cartItems);
 
   useEffect(() => {
     dispatch(getİtem(id));
   }, [id]);
 
-  console.log(item);
-
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState<number>(0);
 
   const decrement = () => {
     if (quantity > 0) setQuantity(quantity - 1);
@@ -32,16 +30,8 @@ const ItemPage = ({ params }: { params: { id: number } }) => {
     if (item.rating && quantity < item.rating?.count) setQuantity(quantity + 1);
   };
 
-  const addBasket = () => {
-    dispatch(
-      addToCart({
-        id: item.id,
-        title: item.title,
-        image: item.image,
-        quantity: quantity,
-        price: item.price,
-      })
-    );
+  const addBasket = (item: dataType) => {
+    dispatch(addToCart(item));
   };
 
   return (
@@ -68,7 +58,7 @@ const ItemPage = ({ params }: { params: { id: number } }) => {
               </span>
             </div>
             <button
-              onClick={addBasket}
+              onClick={() => addBasket(item)}
               className="rounded-lg p-1 bg-orange-500 text-white hover:text-orange-500 hover:bg-white text-medium"
             >
               Sepete Ekle

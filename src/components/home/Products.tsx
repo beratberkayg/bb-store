@@ -9,7 +9,6 @@ const Products = ({ url }: { url: string }) => {
   const { data, dataLoading, dataError } = useAppSelector(
     (state) => state.data
   );
-  console.log(data);
 
   useEffect(() => {
     dispatch(getProducts(url));
