@@ -1,5 +1,6 @@
 "use client";
 
+import Item from "@/components/home/Item";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   addToCart,
@@ -47,49 +48,47 @@ const Shop = () => {
       <div className=" flex flex-col gap-3">
         <div className="flex flex-wrap gap-3 items-center justify-center ">
           {cartItems.map((item) => (
-            <div className="border-2 border-orange-500 rounded-lg p-3 flex flex-col  gap-3 font-medium w-full md:w-[40%] h-[490px]">
+            <div className="bg-white shadow-md hover:scale-105 duration-300  rounded-xl">
               <Link
-                className="flex items-center justify-center"
+                className="flex items-center justify-center py-3"
                 href={`/item/${item.id}`}
               >
                 <img
                   src={item.image}
                   alt=""
-                  className="w-[200px] h-[200px] object-fill"
+                  className="h-48 w-40 object-fit rounded-xl"
                 />
               </Link>
-
-              <div className="flex flex-col justify-center items-center">
-                <h2 className="text-xl text-center line-clamp-1">
+              <div className="px-4 py-3 w-72">
+                <span className="text-gray-400 uppercase text-sm">
+                  {item.category}
+                </span>
+                <p className="text-lg font-bold block truncate capitalize">
                   {item.title}
-                </h2>
-                <p className="text-xl border-b-2 border-orange-500 w-full text-center">
-                  {item.price} $
                 </p>
-                <div className="flex justify-center  items-center gap-1">
-                  <button
-                    onClick={() => handleDecreaseFromCart(item)}
-                    className=" font-extrabold text-[40px] text-red-500"
+                <p className="text-lg font-semibold my-3">{item.price} $</p>
+                <div className="flex justify-between items-center">
+                  <div className="flex justify-center  items-center gap-1">
+                    <button
+                      onClick={() => handleDecreaseFromCart(item)}
+                      className=" font-extrabold text-[40px] text-red-500"
+                    >
+                      -
+                    </button>
+                    <p className="text-2xl">{item.cartQuantity} adet</p>
+                    <button
+                      onClick={() => handleIncreaseQuantity(item)}
+                      className=" font-extrabold text-[35px] text-blue-500"
+                    >
+                      +
+                    </button>
+                  </div>
+                  <div
+                    onClick={() => handleRemoveFromCart(item)}
+                    className="text-xl border-2 w-fit p-1 border-orange-500 rounded-md bg-white font-medium cursor-pointer hover:bg-orange-500 hover:text-white"
                   >
-                    -
-                  </button>
-                  <p className="text-2xl">{item.cartQuantity} adet</p>
-                  <button
-                    onClick={() => handleIncreaseQuantity(item)}
-                    className=" font-extrabold text-[35px] text-blue-500"
-                  >
-                    +
-                  </button>
-                </div>
-
-                <p className="text-lg">
-                  Toplam : {item.price * item.cartQuantity} $
-                </p>
-                <div
-                  onClick={() => handleRemoveFromCart(item)}
-                  className="mt-5 text-xl border-2 w-fit p-1 border-orange-500 rounded-md bg-white font-medium cursor-pointer hover:bg-orange-500 hover:text-white"
-                >
-                  Sepetten Sil
+                    Sepetten Sil
+                  </div>
                 </div>
               </div>
             </div>
