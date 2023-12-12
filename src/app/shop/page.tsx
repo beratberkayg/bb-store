@@ -38,6 +38,12 @@ const Shop = () => {
       <div className="text-center text-2xl font-semibold border-b-2 mb-3 border-orange-500">
         Alışveriş Sepetiniz
       </div>
+      <div className="flex flex-col items-center justify-center mb-3">
+        <div className="border-2 rounded-lg border-orange-500 p-3 text-xl font-medium">
+          <div>Toplam Ürün Sayısı : {cartTotalQuantity}</div>
+          <div>Toplam Ödemeniz : {cartTotalAmount}$</div>
+        </div>
+      </div>
       <div className=" flex flex-col gap-3">
         <div className="flex flex-wrap gap-3 items-center justify-center ">
           {cartItems.map((item) => (
@@ -88,12 +94,6 @@ const Shop = () => {
               </div>
             </div>
           ))}
-          <div className="flex flex-col justify-end items-end ">
-            <div className="border-2 rounded-lg border-orange-500 p-3 text-xl font-medium">
-              <div>Toplam Ürün Sayısı : {cartTotalQuantity}</div>
-              <div>Toplam Ödemeniz : {cartTotalAmount}$</div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
