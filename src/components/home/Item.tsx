@@ -1,25 +1,38 @@
+"use client";
+import { useAppDispatch } from "@/redux/hooks";
+import { addToCart } from "@/redux/slices/cart/cartSlice";
 import { dataType } from "@/types/type";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import React from "react";
+import Link from "next/link";
+import { MdOutlineAddShoppingCart } from "react-icons/md";
 
 const Item = ({ item }: { item: dataType }) => {
-  const router = useRouter();
+  const dispatch = useAppDispatch();
   return (
-    <div
-      className="cursor-pointer border-2 border-orange-500 rounded-xl relative hover:scale-125 hover:z-10"
-      onClick={() => router.push(`/item/${item.id}`)}
-    >
-      <img
-        className="w-[160px] h-[200px]  object-fill rounded-xl md:w-[210px] md:h-[250px] lg:w-[250px] lg:h-[280px]"
-        src={item.image}
-        alt=""
-      />
-      <div className="absolute bottom-0 left-0 text-center w-full text-xl text-white shadow-lg shadow-[#2A0E61]/50 bg-[#03001417] backdrop-blur-md line-clamp-1 rounded-b-xl">
-        {item.title}
-      </div>
-      <div className="absolute top-1 right-1 bg-[#03001417] backdrop-blur-md rounded-full w-14 h-14 flex items-center justify-center font-bold bg-orange-500">
-        {item.price}$
+    <div className="bg-white shadow-md hover:scale-105 duration-300  rounded-xl">
+      <Link
+        href={`/item/${item.id}`}
+        className="flex items-center justify-center py-3"
+      >
+        <img
+          src={item.image}
+          className="h-48 w-40 object-fit rounded-xl"
+          alt=""
+        />
+      </Link>
+      <div className="px-4 py-3 w-72">
+        <span className="text-gray-400 uppercase text-sm">{item.category}</span>
+        <p className="text-lg font-bold block truncate capitalize">
+          {item.title}
+        </p>
+        <div className="flex items-center justify-between">
+          <p className="text-lg font-semibold my-3">{item.price} $</p>
+          <div
+            onClick={() => dispatch(addToCart(item))}
+            className="cursor-pointer text-orange-500"
+          >
+            <MdOutlineAddShoppingCart size={35} />
+          </div>
+        </div>
       </div>
     </div>
   );
