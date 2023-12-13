@@ -10,6 +10,7 @@ import {
 } from "@/redux/slices/cart/cartSlice";
 import Link from "next/link";
 import { useEffect } from "react";
+import { motion } from "framer-motion";
 
 const Shop = () => {
   const dispatch = useAppDispatch();
@@ -35,16 +36,15 @@ const Shop = () => {
   }, [cartItems]);
 
   return (
-    <div className="mt-3 flex flex-col">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="mt-3 flex flex-col "
+    >
       <div className="text-center text-2xl font-semibold border-b-2 mb-3 border-orange-500">
         Alışveriş Sepetiniz
       </div>
-      <div className="flex flex-col items-center justify-center mb-3">
-        <div className="border-2 rounded-lg border-orange-500 p-3 text-xl font-medium">
-          <div>Toplam Ürün Sayısı : {cartTotalQuantity}</div>
-          <div>Toplam Ödemeniz : {cartTotalAmount}$</div>
-        </div>
-      </div>
+
       <div className=" flex flex-col gap-3">
         <div className="flex flex-wrap gap-3 items-center justify-center ">
           {cartItems.map((item) => (
@@ -95,7 +95,13 @@ const Shop = () => {
           ))}
         </div>
       </div>
-    </div>
+      <div className=" flex flex-col items-center justify-center mt-3">
+        <div className="border-2 rounded-lg border-orange-500 p-3 text-xl font-medium bg-orange-500">
+          <div>Toplam Ürün Sayısı : {cartTotalQuantity}</div>
+          <div>Toplam Ödemeniz : {cartTotalAmount}$</div>
+        </div>
+      </div>
+    </motion.div>
   );
 };
 

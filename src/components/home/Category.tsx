@@ -19,7 +19,7 @@ const Category = ({ url }: { url: string }) => {
         className={`first-letter:uppercase text-xl font-medium  ${
           url ? " " : "-translate-y-2 border-b border-blue-500 text-orange-500"
         } `}
-        href={"/"}
+        href={"/#products"}
       >
         All
       </Link>
@@ -30,7 +30,7 @@ const Category = ({ url }: { url: string }) => {
               ? " -translate-y-3 border-b border-blue-500 text-orange-500"
               : ""
           } `}
-          href={`/?category=${ct}`}
+          href={`/?category=${ct}/#products`}
           key={i}
         >
           {ct}

@@ -6,6 +6,7 @@ import { getİtem } from "@/redux/slices/dataSlice";
 import { dataType } from "@/types/type";
 
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 const ItemPage = ({ params }: { params: { id: number } }) => {
   const id = params.id;
@@ -25,7 +26,11 @@ const ItemPage = ({ params }: { params: { id: number } }) => {
   };
 
   return (
-    <div className="w-full h-full flex flex-col  md:items-center mt-3">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="w-full h-full flex flex-col  md:items-center mt-3"
+    >
       {dataLoading && <div>Yükleniyor...</div>}
       <img
         src={item.image}
@@ -60,7 +65,7 @@ const ItemPage = ({ params }: { params: { id: number } }) => {
           {item.description}
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

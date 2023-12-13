@@ -1,15 +1,24 @@
 "use client";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 const Login = () => {
   const [change, setChange] = useState<boolean>(true);
   return (
-    <div className="mt-10 flex justify-center items-center">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="mt-10 flex justify-center items-center"
+    >
       {/* login container */}
       <div className=" bg-white/50  flex rounded-xl shadow-lg max-w-3xl p-5">
         {/* form */}
         {change ? (
-          <div className="sm:w-1/2 px-5">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="sm:w-1/2 px-5"
+          >
             <h2 className="font-bold text-2xl text-[#002074]">Login</h2>
             <p>Easily log in...</p>
             <form className="flex flex-col gap-4 lg:gap-7">
@@ -43,9 +52,13 @@ const Login = () => {
                 Register
               </div>
             </div>
-          </div>
+          </motion.div>
         ) : (
-          <div className="sm:w-1/2 px-5">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="sm:w-1/2 px-5"
+          >
             <h2 className="font-bold text-2xl text-[#002074]">Register</h2>
             <p>Easily register...</p>
             <form className="flex flex-col gap-4 lg:gap-7">
@@ -85,7 +98,7 @@ const Login = () => {
                 Login
               </div>
             </div>
-          </div>
+          </motion.div>
         )}
 
         {/* image */}
@@ -93,7 +106,7 @@ const Login = () => {
           <img className="" src="/login.png" alt="" />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
