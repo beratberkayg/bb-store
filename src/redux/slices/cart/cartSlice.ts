@@ -1,13 +1,14 @@
 import { dataType } from "@/types/type";
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface initialStateType {
-  cartItems: any[];
+  cartItems: dataType[];
   cartTotalQuantity: number;
   cartTotalAmount: number;
 }
 
-const storedItems = localStorage.getItem("cartItems");
+const storedItems =
+  typeof window !== "undefined" ? localStorage.getItem("cartItems") : null;
 
 const initialState: initialStateType = {
   cartItems: storedItems ? JSON.parse(storedItems) : [],
@@ -52,7 +53,7 @@ const cartSlice = createSlice({
       }
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
-    getTotals: (state, action) => {
+    getTotals: (state, action: PayloadAction<any>) => {
       let { total, quantity } = state.cartItems.reduce(
         (cartTotal, cartItem) => {
           const { price, cartQuantity } = cartItem;
@@ -70,10 +71,14 @@ const cartSlice = createSlice({
       state.cartTotalQuantity = quantity;
       state.cartTotalAmount = total;
     },
+    clearCart: (state) => {
+      state.cartItems = [];
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+    },
   },
 });
 
-export const { addToCart, removeFromCart, decreaseCart, getTotals } =
+export const { addToCart, removeFromCart, decreaseCart, getTotals, clearCart } =
   cartSlice.actions;
 
 export default cartSlice.reducer;

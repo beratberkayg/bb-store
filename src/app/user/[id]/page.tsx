@@ -42,8 +42,6 @@ const User = ({ params }: { params: { id: string } }) => {
 
   const [user, loading] = useAuthState(auth);
 
-  console.log(user?.uid);
-
   const getData = async () => {
     if (loading) return;
     if (!user) return router.push("/");
@@ -81,9 +79,15 @@ const User = ({ params }: { params: { id: string } }) => {
   };
 
   useEffect(() => {
+    if (!user) {
+      router.push("/");
+    }
+
     getData();
     getUser();
   }, [user, loading]);
+
+  console.log(users);
 
   return (
     <motion.div

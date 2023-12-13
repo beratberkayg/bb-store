@@ -3,7 +3,9 @@ import Category from "@/components/home/Category";
 import Hero from "@/components/home/Hero";
 import Products from "@/components/home/Products";
 import Up from "@/components/home/Up";
+import { clearCart } from "@/redux/slices/cart/cartSlice";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 interface ParamsType {
   [key: string]: string;

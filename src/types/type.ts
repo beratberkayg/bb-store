@@ -7,12 +7,12 @@ export interface RatingType {
 export interface dataType {
   id?: number;
   title?: string;
-  price?: string | number;
+  price?: string | number | any;
   category?: string;
   description?: string;
   image?: string;
   rating?: RatingType;
-  cartQuantity?: number;
+  cartQuantity?: number | any;
 }
 
 export type CommentProps = {

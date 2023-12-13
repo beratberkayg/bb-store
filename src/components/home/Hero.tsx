@@ -19,14 +19,14 @@ const Hero = () => {
           <span className=" capitalize">{user && user.displayName}</span>
         </h1>
         <p className="text-sm md:text-lg lg:text-xl flex flex-col">
-          Alışverişin yeni ve heyecan verici adresi burada! En yeni trendleri
-          keşfedin, tarzınızı öne çıkarın ve özel indirimlerden faydalanın.
-          Sadece bir tık uzağınızdaki harika alışveriş deneyimine hazır olun.
+          The new and exciting address for shopping is here! Highlight the
+          latest trends, your style and benefit from special discounts. Get
+          ready for a wonderful shopping experience that is just a click away.
           <Link
             href={"#products"}
             className="cursor-pointer w-fit border-b-2 p-1 border-orange-500"
           >
-            Hemen göz atın!
+            Check it out now!
           </Link>
         </p>
       </motion.div>

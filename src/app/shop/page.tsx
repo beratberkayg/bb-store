@@ -1,9 +1,9 @@
 "use client";
 
-import Item from "@/components/home/Item";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   addToCart,
+  clearCart,
   decreaseCart,
   getTotals,
   removeFromCart,
@@ -12,13 +12,14 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaTrash } from "react-icons/fa";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "@/services/firebase";
 
 const Shop = () => {
   const dispatch = useAppDispatch();
   const { cartItems, cartTotalAmount, cartTotalQuantity } = useAppSelector(
     (state) => state.carts
   );
-  console.log(cartItems, cartTotalAmount, cartTotalQuantity);
 
   const handleRemoveFromCart = (item: any) => {
     dispatch(removeFromCart(item));
@@ -31,6 +32,8 @@ const Shop = () => {
   const handleIncreaseQuantity = (item: any) => {
     dispatch(addToCart(item));
   };
+
+  const [user, loading] = useAuthState(auth);
 
   useEffect(() => {
     dispatch(getTotals(cartItems));
@@ -103,7 +106,7 @@ const Shop = () => {
                     >
                       -
                     </button>
-                    <p className="text-2xl">{item.cartQuantity} adet</p>
+                    <p className="text-2xl">{item.cartQuantity} </p>
                     <button
                       onClick={() => handleIncreaseQuantity(item)}
                       className=" font-extrabold text-[35px] text-blue-500"
@@ -125,8 +128,8 @@ const Shop = () => {
       </div>
       <div className=" flex flex-col items-center justify-center mt-3">
         <div className="border-2 rounded-lg border-orange-500 p-3 text-xl font-medium bg-orange-500">
-          <div>Toplam Ürün Sayısı : {cartTotalQuantity}</div>
-          <div>Toplam Ödemeniz : {cartTotalAmount}$</div>
+          <div>Total Product : {cartTotalQuantity}</div>
+          <div>Total Payment : {cartTotalAmount}$</div>
         </div>
       </div>
     </motion.div>

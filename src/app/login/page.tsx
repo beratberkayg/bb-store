@@ -162,7 +162,6 @@ const Login = () => {
           </motion.div>
         )}
 
-        {/* image */}
         <div className=" hidden w-1/2 bg-orange-500/90 rounded-xl sm:flex items-center justify-center">
           <img className="" src="/login.png" alt="" />
         </div>
