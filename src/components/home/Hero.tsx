@@ -2,8 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { motion } from "framer-motion";
-
+import { auth, db } from "@/services/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 const Hero = () => {
+  const [user, loading] = useAuthState(auth);
   return (
     <div className="flex justify-center items-center flex-wrap md:flex-nowrap mt-3">
       <motion.div
@@ -13,7 +15,8 @@ const Hero = () => {
         className="flex flex-col lg:gap-5"
       >
         <h1 className="text-2xl lg:text-[50px] font-bold text-center text-orange-500">
-          Hoş Geldin!
+          Hoş Geldin!{" "}
+          <span className=" capitalize">{user && user.displayName}</span>
         </h1>
         <p className="text-sm md:text-lg lg:text-xl flex flex-col">
           Alışverişin yeni ve heyecan verici adresi burada! En yeni trendleri

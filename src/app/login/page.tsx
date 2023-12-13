@@ -1,9 +1,53 @@
 "use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import {
+  changeEmail,
+  changeName,
+  changePassword,
+  login,
+  register,
+} from "@/redux/slices/auth/authSlice";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
   const [change, setChange] = useState<boolean>(true);
+  const dispatch = useAppDispatch();
+  const { name, email, password } = useAppSelector((state) => state.auth);
+  const router = useRouter();
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    actionType: string
+  ) => {
+    switch (actionType) {
+      case "name":
+        dispatch(changeName(e.currentTarget.value));
+        break;
+      case "email":
+        dispatch(changeEmail(e.currentTarget.value));
+        break;
+      case "password":
+        dispatch(changePassword(e.currentTarget.value));
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleRegister = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(register({ name, email, password }));
+    router.push("/");
+  };
+
+  const handleLogin = (e: any) => {
+    e.preventDefault();
+    dispatch(login({ email, password }));
+    router.push("/");
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -21,20 +65,28 @@ const Login = () => {
           >
             <h2 className="font-bold text-2xl text-[#002074]">Login</h2>
             <p>Easily log in...</p>
-            <form className="flex flex-col gap-4 lg:gap-7">
+            <form
+              onSubmit={handleLogin}
+              className="flex flex-col gap-4 lg:gap-7"
+            >
               <input
+                onChange={(e) => handleChange(e, "email")}
                 type="text"
                 className="p-2 mt-6 rounded-xl border outline-sky-500"
                 name="email"
                 placeholder="Email"
               />
               <input
+                onChange={(e) => handleChange(e, "password")}
                 type="password"
                 className="p-2  rounded-xl border outline-sky-500"
                 name="password"
                 placeholder="Password"
               />
-              <button className="bg-[#002074] rounded-xl text-white py-2">
+              <button
+                type="submit"
+                className="bg-[#002074] rounded-xl text-white py-2"
+              >
                 Login
               </button>
             </form>
@@ -61,26 +113,35 @@ const Login = () => {
           >
             <h2 className="font-bold text-2xl text-[#002074]">Register</h2>
             <p>Easily register...</p>
-            <form className="flex flex-col gap-4 lg:gap-7">
+            <form
+              onSubmit={handleRegister}
+              className="flex flex-col gap-4 lg:gap-7"
+            >
               <input
+                onChange={(e) => handleChange(e, "name")}
                 type="text"
                 className="p-2 mt-6 rounded-xl border outline-sky-500"
                 name="name"
                 placeholder="Name"
               />
               <input
+                onChange={(e) => handleChange(e, "email")}
                 type="text"
                 className="p-2 rounded-xl border outline-sky-500"
                 name="email"
                 placeholder="Email"
               />
               <input
+                onChange={(e) => handleChange(e, "password")}
                 type="password"
                 className="p-2  rounded-xl border outline-sky-500"
                 name="password"
                 placeholder="Password"
               />
-              <button className="bg-[#002074] rounded-xl text-white py-2">
+              <button
+                type="submit"
+                className="bg-[#002074] rounded-xl text-white py-2"
+              >
                 Register
               </button>
             </form>

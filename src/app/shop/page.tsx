@@ -11,6 +11,7 @@ import {
 import Link from "next/link";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
+import { FaTrash } from "react-icons/fa";
 
 const Shop = () => {
   const dispatch = useAppDispatch();
@@ -35,6 +36,25 @@ const Shop = () => {
     dispatch(getTotals(cartItems));
   }, [cartItems]);
 
+  const container = {
+    visible: {
+      transition: {
+        delayChildren: 0.3,
+        staggerChildre: 0.1,
+      },
+    },
+  };
+  const animate = {
+    hidden: {
+      opacity: 0,
+      translateY: 30,
+    },
+    visible: {
+      opacity: 1,
+      translateY: 0,
+    },
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -46,9 +66,17 @@ const Shop = () => {
       </div>
 
       <div className=" flex flex-col gap-3">
-        <div className="flex flex-wrap gap-3 items-center justify-center ">
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={container}
+          className="flex flex-wrap gap-5 items-center justify-center "
+        >
           {cartItems.map((item) => (
-            <div className="bg-white shadow-md hover:scale-105 duration-300  rounded-xl">
+            <motion.div
+              variants={animate}
+              className="bg-white shadow-md hover:scale-105 duration-300  rounded-xl"
+            >
               <Link
                 className="flex items-center justify-center py-3"
                 href={`/item/${item.id}`}
@@ -85,15 +113,15 @@ const Shop = () => {
                   </div>
                   <div
                     onClick={() => handleRemoveFromCart(item)}
-                    className="text-xl border-2 w-fit p-1 border-orange-500 rounded-md bg-white font-medium cursor-pointer hover:bg-orange-500 hover:text-white"
+                    className=" cursor-pointer text-red-600 hover:scale-125 "
                   >
-                    Sepetten Sil
+                    <FaTrash size={30} />
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
       <div className=" flex flex-col items-center justify-center mt-3">
         <div className="border-2 rounded-lg border-orange-500 p-3 text-xl font-medium bg-orange-500">

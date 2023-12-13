@@ -9,7 +9,7 @@ import {
 import { doc, setDoc } from "firebase/firestore";
 
 interface type {
-  name: string;
+  name?: string;
   email: string;
   password: string;
 }
