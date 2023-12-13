@@ -7,6 +7,8 @@ import { dataType } from "@/types/type";
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import Item from "@/components/home/Item";
+import { MdOutlineAddShoppingCart } from "react-icons/md";
 
 const ItemPage = ({ params }: { params: { id: number } }) => {
   const id = params.id;
@@ -29,41 +31,29 @@ const ItemPage = ({ params }: { params: { id: number } }) => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="w-full h-full flex flex-col  md:items-center mt-3"
+      className="w-full min-h-screen mt-3"
     >
-      {dataLoading && <div>Yükleniyor...</div>}
-      <img
-        src={item.image}
-        className="w-full h-[300px] md:h-[400px] md:w-[300px] lg:w-full object-fill md:object-contain rounded-2xl"
-      />
-      <div className="flex flex-col items-center mt-3">
-        <div className="border-b-2 border-t-2 p-1 md:border-t-0 border-red-500 text-center">
-          <h2 className=" text-xl font-medium md:text-3xl text-center">
+      <div className="bg-white shadow-md rounded-xl flex items-center justify-center flex-col py-3 gap-3 md:flex-row  md:px-10">
+        <div className="w-[200px] md:w-[450px] p-3 shadow-black shadow rounded-2xl">
+          <img className=" " src={item.image} alt="" />
+        </div>
+        <div className="flex items-center justify-center flex-col gap-1 md:gap-5 ">
+          <span className="text-gray-400 uppercase text-sm md:text-lg">
+            {item.category}
+          </span>
+          <p className="text-lg font-bold block capitalize text-center md:text-xl">
             {item.title}
-          </h2>
-          <div>
-            <p className="text-lg font-bold md:text-2xl">{item.price}$</p>
-            {/* <div className="flex items-center justify-center gap-3 text-2xl">
-              <span onClick={decrement} className="cursor-pointer">
-                -
-              </span>
-              <span>{quantity}</span>
-              <span onClick={increment} className="cursor-pointer">
-                +
-              </span>
-            </div> */}
-            <button
-              onClick={() => addBasket(item)}
-              className="rounded-lg py-1 px-3 bg-orange-500 text-white hover:text-orange-500 hover:bg-white text-medium my-3"
-            >
-              Sepete Ekle
-            </button>
+          </p>
+          <p className="text-lg md:text-xl font-semibold">{item.price} $</p>
+          <div className="text-center md:text-lg">{item.description}</div>
+
+          <div
+            onClick={() => dispatch(addToCart(item))}
+            className="cursor-pointer text-orange-500 active:to-blue-600"
+          >
+            <MdOutlineAddShoppingCart size={50} />
           </div>
         </div>
-
-        <p className="text-center border-b-2 md:border-b-0 p-1 border-red-500 md:text-lg">
-          {item.description}
-        </p>
       </div>
     </motion.div>
   );
