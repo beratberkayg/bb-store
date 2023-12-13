@@ -25,7 +25,7 @@ export const register = createAsyncThunk(
   async ({ name, email, password }: type) => {
     const user = await createUserWithEmailAndPassword(auth, email, password);
     await updateProfile(user.user, { displayName: name });
-    setDoc(doc(db, "users", user.user.uid), {
+    setDoc(doc(db, "users", email), {
       name,
       email,
       password,

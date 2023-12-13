@@ -90,6 +90,9 @@ const User = ({ params }: { params: { id: string } }) => {
       className="mt-3"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
+      transition={{
+        duration: 1,
+      }}
     >
       <div className="bg-white/50 shadow-md rounded-md flex items-center justify-center p-3 flex-col gap-3">
         <div className="border-black border rounded-full w-[100px] h-[100px] md:w-[200px] md:h-[200px] text-center flex items-center justify-center text-3xl md:text-[100px]">

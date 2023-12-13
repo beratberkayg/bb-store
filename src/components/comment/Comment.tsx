@@ -3,7 +3,7 @@ import { CommentProps } from "@/types/type";
 import Link from "next/link";
 import React from "react";
 import { FaUser } from "react-icons/fa";
-
+import { motion } from "framer-motion";
 const Comment = ({
   comment,
   children,
@@ -12,7 +12,12 @@ const Comment = ({
   children: React.ReactNode;
 }) => {
   return (
-    <div className=" bg-white shadow-md rounded-md py-1 px-2 md:p-3 w-full h-[200px] md:w-[48%] md:h-[150px] lg:w-[31%] flex flex-col overflow-y-auto overflow-x-hidden">
+    <motion.div
+      initial={{ x: -500 }}
+      animate={{ x: 0 }}
+      transition={{ duration: "1" }}
+      className=" bg-white shadow-md rounded-md py-1 px-2 md:p-3 w-full h-[200px] md:w-[48%] md:h-[230px] lg:w-[31%] flex flex-col overflow-y-auto overflow-x-hidden"
+    >
       <div className="flex items-center justify-start gap-3 border-b-2 border-black py-2 ">
         <div className="text-orange-500">
           <FaUser size={35} />
@@ -39,7 +44,7 @@ const Comment = ({
         </div>
       </div>
       <div>{children}</div>
-    </div>
+    </motion.div>
   );
 };
 
