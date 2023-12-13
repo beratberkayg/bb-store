@@ -96,13 +96,10 @@ const ItemPage = ({ params }: { params: { id: number } }) => {
       {user && <Post item={item} />}
       <div className="mt-5 flex flex-col gap-3">
         <h1 className="text-xl">User Comments</h1>
-        <div className="flex gap-5 items-center justify-center">
-          {comments.map((comment) =>
-            comment.id.toString() === item.id?.toString() ? (
-              <div></div>
-            ) : (
-              <Comment comment={comment} />
-            )
+        <div className="flex gap-5 items-center justify-center flex-wrap">
+          {comments.map(
+            (comment) =>
+              comment.item.id === item.id && <Comment comment={comment} />
           )}
         </div>
       </div>

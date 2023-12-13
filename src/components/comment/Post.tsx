@@ -10,7 +10,7 @@ interface postType {
   comment: string | string[];
 }
 
-const Comment = ({ item }: { item: dataType }) => {
+const Post = ({ item }: { item: dataType }) => {
   const [user, loading] = useAuthState(auth);
   const [post, setPost] = useState<postType>({
     comment: "",
@@ -61,4 +61,4 @@ const Comment = ({ item }: { item: dataType }) => {
   );
 };
 
-export default Comment;
+export default Post;
