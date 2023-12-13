@@ -29,6 +29,7 @@ export const register = createAsyncThunk(
       name,
       email,
       password,
+      id: user.user.uid,
     });
   }
 );
