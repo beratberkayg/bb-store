@@ -17,7 +17,7 @@ const Category = ({ url }: { url: string }) => {
     <div className="flex items-center justify-center flex-wrap gap-7 md:items-start md:justify-start md:flex md:flex-col border-b border-orange-500 md:border-none py-1 mt-1">
       <Link
         className={`first-letter:uppercase text-xl font-medium  ${
-          url ? " " : "-translate-y-2 border-b border-blue-500 text-orange-500"
+          url ? " " : ""
         } `}
         href={"/#products"}
       >
@@ -27,7 +27,7 @@ const Category = ({ url }: { url: string }) => {
         <Link
           className={`first-letter:uppercase text-xl font-medium  ${
             url === ct
-              ? " -translate-y-3 border-b border-blue-500 text-orange-500"
+              ? "-translate-y-3 border-b border-blue-500 text-orange-500 "
               : ""
           } `}
           href={`/?category=${ct}/#products`}

@@ -99,7 +99,11 @@ const ItemPage = ({ params }: { params: { id: number } }) => {
         <div className="flex gap-5 items-center justify-center flex-wrap">
           {comments.map(
             (comment) =>
-              comment.item.id === item.id && <Comment comment={comment} />
+              comment.item.id === item.id && (
+                <Comment key={comment.id} comment={comment}>
+                  {""}
+                </Comment>
+              )
           )}
         </div>
       </div>
