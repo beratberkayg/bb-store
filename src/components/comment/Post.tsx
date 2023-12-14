@@ -19,7 +19,7 @@ const Post = ({ item }: { item: dataType }) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (post.comment.length < 2) {
+    if (post.comment.length < 3) {
       toast.error("Please enter a comment", {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 1000,
