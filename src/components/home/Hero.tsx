@@ -15,7 +15,7 @@ const Hero = () => {
         className="flex flex-col lg:gap-5"
       >
         <h1 className="text-2xl lg:text-[50px] font-bold text-center text-orange-500">
-          Hoş Geldin!{" "}
+          Welcome!{" "}
           <span className=" capitalize">{user && user.displayName}</span>
         </h1>
         <p className="text-sm md:text-lg lg:text-xl flex flex-col">
