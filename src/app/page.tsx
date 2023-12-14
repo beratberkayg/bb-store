@@ -4,8 +4,11 @@ import Hero from "@/components/home/Hero";
 import Products from "@/components/home/Products";
 import Up from "@/components/home/Up";
 import { clearCart } from "@/redux/slices/cart/cartSlice";
+import { auth } from "@/services/firebase";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { toast } from "react-toastify";
 
 interface ParamsType {
   [key: string]: string;

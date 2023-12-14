@@ -5,6 +5,7 @@ import { dataType } from "@/types/type";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { toast } from "react-toastify";
 
 interface postType {
   comment: string | string[];
@@ -19,6 +20,10 @@ const Post = ({ item }: { item: dataType }) => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (post.comment.length < 2) {
+      toast.error("Please enter a comment", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 1000,
+      });
       return;
     }
     const collectionRef = collection(db, "comments");
@@ -31,6 +36,11 @@ const Post = ({ item }: { item: dataType }) => {
       item: item,
     });
     setPost({ comment: "" });
+
+    toast.success("Comment added successfully", {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 1000,
+    });
   };
 
   return (

@@ -20,6 +20,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { FaUser } from "react-icons/fa";
 import { BsTrash2Fill } from "react-icons/bs";
 import Image from "next/image";
+import { toast } from "react-toastify";
 
 interface userProps {
   email: string;
@@ -35,6 +36,10 @@ const User = ({ params }: { params: { id: string } }) => {
   const router = useRouter();
   const handleLogOut = () => {
     dispatch(logout());
+    toast.success("Log Out successfully", {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 1000,
+    });
     router.push("/");
   };
 
@@ -74,6 +79,10 @@ const User = ({ params }: { params: { id: string } }) => {
   const deleteComment = async (id: string) => {
     const docRef = doc(db, "comments", id);
     await deleteDoc(docRef);
+    toast.success("Comment deleted successfully", {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 1000,
+    });
   };
 
   useEffect(() => {

@@ -5,6 +5,8 @@ import "./globals.css";
 import ReduxProvider from "@/redux/ReduxProvider";
 import Navbar from "@/components/header/Navbar";
 import Footer from "@/components/footer/Footer";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/ReactToastify.css";
 
 const roboto = Roboto_Condensed({ subsets: ["latin"] });
 
@@ -24,6 +26,7 @@ export default function RootLayout({
         className={`${roboto.className} flex flex-col min-h-screen mx-3 md:mx-7 lg:w-[80%] lg:mx-auto text-slate-900 overflow-x-hidden bg-slate-100`}
       >
         <ReduxProvider>
+          <ToastContainer limit={1} />
           <Navbar />
           <main className="flex-grow">{children}</main>
           <Footer />

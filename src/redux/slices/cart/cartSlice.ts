@@ -1,5 +1,6 @@
 import { dataType } from "@/types/type";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 interface initialStateType {
   cartItems: dataType[];
@@ -31,6 +32,10 @@ const cartSlice = createSlice({
         state.cartItems.push(tempItem);
       }
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+      toast.success("Product added successfully", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 1000,
+      });
     },
     removeFromCart: (state, action) => {
       const nextCartItems = state.cartItems.filter(

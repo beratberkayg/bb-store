@@ -12,12 +12,16 @@ import {
 } from "@/redux/slices/auth/authSlice";
 import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
+import { toast } from "react-toastify";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "@/services/firebase";
 
 const Login = () => {
   const [change, setChange] = useState<boolean>(true);
   const dispatch = useAppDispatch();
   const { name, email, password } = useAppSelector((state) => state.auth);
   const router = useRouter();
+  const [user, loading] = useAuthState(auth);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -40,18 +44,48 @@ const Login = () => {
 
   const handleRegister = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (password.length < 6) {
+      toast.error("Password to short", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 1000,
+      });
+      return;
+    }
+
     dispatch(register({ name, email, password }));
+    toast.success("Register successfully", {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 1000,
+    });
     router.push("/");
   };
 
   const handleLogin = (e: any) => {
     e.preventDefault();
+
     dispatch(login({ email, password }));
-    router.push("/");
+
+    if (user) {
+      router.push("/");
+      toast.success("Login successfully", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 1000,
+      });
+    } else {
+      toast.error("Email or password is incorrect", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 1000,
+      });
+    }
   };
 
   const easyLogin = () => {
     dispatch(googleLogin());
+    toast.success("Login successfully", {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 1000,
+    });
     router.push("/");
   };
 
@@ -150,7 +184,7 @@ const Login = () => {
                 type="password"
                 className="p-2  rounded-xl border outline-sky-500"
                 name="password"
-                placeholder="Password"
+                placeholder="Password - (minimum 6 characters)"
               />
               <button
                 type="submit"
