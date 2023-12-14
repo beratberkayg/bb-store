@@ -1,8 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { auth, db } from "@/services/firebase";
 import {
+  GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   updateProfile,
 } from "firebase/auth";
@@ -26,9 +28,8 @@ export const register = createAsyncThunk(
     const user = await createUserWithEmailAndPassword(auth, email, password);
     await updateProfile(user.user, { displayName: name });
     setDoc(doc(db, "users", user.user.uid), {
-      name,
-      email,
-      password,
+      name: name,
+      email: email,
       id: user.user.uid,
     });
   }
@@ -43,6 +44,18 @@ export const login = createAsyncThunk(
 
 export const logout = createAsyncThunk("auth/logout", async () => {
   await signOut(auth);
+});
+
+const googleProvider = new GoogleAuthProvider();
+
+export const googleLogin = createAsyncThunk("auth/googleLogin", async () => {
+  const user = await signInWithPopup(auth, googleProvider);
+
+  setDoc(doc(db, "users", user.user.uid), {
+    name: user.user.displayName,
+    email: user.user.email,
+    id: user.user.uid,
+  });
 });
 
 const authSlice = createSlice({

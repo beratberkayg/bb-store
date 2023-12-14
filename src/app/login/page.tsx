@@ -6,10 +6,12 @@ import {
   changeEmail,
   changeName,
   changePassword,
+  googleLogin,
   login,
   register,
 } from "@/redux/slices/auth/authSlice";
 import { useRouter } from "next/navigation";
+import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
   const [change, setChange] = useState<boolean>(true);
@@ -45,6 +47,11 @@ const Login = () => {
   const handleLogin = (e: any) => {
     e.preventDefault();
     dispatch(login({ email, password }));
+    router.push("/");
+  };
+
+  const easyLogin = () => {
+    dispatch(googleLogin());
     router.push("/");
   };
 
@@ -85,11 +92,18 @@ const Login = () => {
               />
               <button
                 type="submit"
-                className="bg-[#002074] rounded-xl text-white py-2"
+                className="bg-[#002074] md:text-xl rounded-xl text-white py-2"
               >
                 Login
               </button>
             </form>
+            <div
+              onClick={easyLogin}
+              className="flex items-center justify-center gap-3 border py-2 px-3 text-base md:text-xl rounded-xl bg-[#002074] text-white cursor-pointer active:scale-50 mt-3"
+            >
+              <FcGoogle size={25} />
+              Google ile Giriş Yap
+            </div>
             <div className="mt-5 grid grid-cols-3 items-center text-gray-500">
               <hr className="border-gray-500" />
               <p className="text-center">OR</p>
@@ -140,7 +154,7 @@ const Login = () => {
               />
               <button
                 type="submit"
-                className="bg-[#002074] rounded-xl text-white py-2"
+                className="bg-[#002074] rounded-xl md:text-xl text-white py-2"
               >
                 Register
               </button>

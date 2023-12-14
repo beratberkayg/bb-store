@@ -77,6 +77,7 @@ const Shop = () => {
         >
           {cartItems.map((item) => (
             <motion.div
+              key={item.id}
               variants={animate}
               className="bg-white shadow-md hover:scale-105 duration-300  rounded-xl"
             >
@@ -126,12 +127,23 @@ const Shop = () => {
           ))}
         </motion.div>
       </div>
-      <div className=" flex flex-col items-center justify-center mt-3">
-        <div className="border-2 rounded-lg border-orange-500 p-3 text-xl font-medium bg-orange-500">
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={container}
+        className=" flex flex-col items-center justify-center mt-3"
+      >
+        <motion.div
+          variants={animate}
+          transition={{
+            duration: 1,
+          }}
+          className="border-2 rounded-lg border-orange-500 p-3 text-xl font-medium bg-orange-500"
+        >
           <div>Total Product : {cartTotalQuantity}</div>
           <div>Total Payment : {cartTotalAmount}$</div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </motion.div>
   );
 };

@@ -19,6 +19,7 @@ import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { FaUser } from "react-icons/fa";
 import { BsTrash2Fill } from "react-icons/bs";
+import Image from "next/image";
 
 interface userProps {
   email: string;
@@ -44,7 +45,6 @@ const User = ({ params }: { params: { id: string } }) => {
 
   const getData = async () => {
     if (loading) return;
-    if (!user) return router.push("/");
 
     const collectionRef = collection(db, "comments");
     const q = query(collectionRef, where("kullaniciId", "==", params.id));
@@ -71,8 +71,6 @@ const User = ({ params }: { params: { id: string } }) => {
     });
   };
 
-  console.log(users);
-
   const deleteComment = async (id: string) => {
     const docRef = doc(db, "comments", id);
     await deleteDoc(docRef);
@@ -82,8 +80,6 @@ const User = ({ params }: { params: { id: string } }) => {
     getData();
     getUser();
   }, [user, loading]);
-
-  console.log(users);
 
   return (
     <motion.div
@@ -96,7 +92,17 @@ const User = ({ params }: { params: { id: string } }) => {
     >
       <div className="bg-white/50 shadow-md rounded-md flex items-center justify-center p-3 flex-col gap-3">
         <div className="border-black border rounded-full w-[100px] h-[100px] md:w-[200px] md:h-[200px] text-center flex items-center justify-center text-3xl md:text-[100px]">
-          <FaUser />
+          {users.map((a) =>
+            a.id === user?.uid && user?.photoURL ? (
+              <img
+                className="rounded-full w-[100px] h-[100px] md:w-[200px] md:h-[200px]"
+                src={user.photoURL}
+                alt=""
+              />
+            ) : (
+              <FaUser />
+            )
+          )}
         </div>
         <div className="text-center">
           <p className=" first-letter:uppercase">{users.map((a) => a.name)}</p>
