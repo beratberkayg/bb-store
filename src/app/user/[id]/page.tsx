@@ -79,10 +79,6 @@ const User = ({ params }: { params: { id: string } }) => {
   };
 
   useEffect(() => {
-    if (!user) {
-      router.push("/");
-    }
-
     getData();
     getUser();
   }, [user, loading]);
